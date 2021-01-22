@@ -230,6 +230,20 @@ tbody tr td {
     visibility: hidden;
 }
 
+.modal-overlay>i {
+    position: absolute;
+    top: 4rem;
+    right: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
