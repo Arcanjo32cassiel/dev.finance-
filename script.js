@@ -10,37 +10,27 @@ openclosemodal();
 
 // =========/
 const transections = [{
-        id: 1,
         description: ' Luz',
         amount: -50000,
         date: '23/01/2021',
     },
     {
-        id: 2,
         description: ' Websiste',
         amount: 500000,
         date: '23/01/2021',
-    },
-    {
-        id: 3,
+    }, {
         description: ' Internet',
         amount: -20000,
         date: '23/01/2021',
-    },
-    {
-        id: 4,
+    }, {
         description: ' Matériais Escolares da Izáuria',
         amount: -30000,
         date: '23/02/2021',
-    },
-    {
-        id: 5,
+    }, {
         description: ' Landingpage',
         amount: 30000,
         date: '3/02/2021',
-    },
-    {
-        id: 6,
+    }, {
         description: ' Hostsite',
         amount: 10000,
         date: '10/02/2021',
@@ -51,6 +41,14 @@ const transections = [{
 // ====TRNASECTIONS=====
 const Transection = {
     all: transections,
+    add(transection) {
+        Transection.all.push(transection)
+        App.reload()
+    },
+    remove(index) {
+        Transection.all.splice(index, 1);
+        App.reload()
+    },
     incomes() {
         let income = 0;
         // transections.forEach(transection => {
@@ -71,7 +69,7 @@ const Transection = {
         // let total = 0;
         // transections.filter(transection => transection.amount > 0 ? total += transection.amount : total)
         // transections.filter(transection => transection.amount < 0 ? total += transection.amount : total)
-        // return total / 100
+        // return total 
         return Transection.incomes() + Transection.expenses()
 
     }
@@ -105,6 +103,9 @@ const DOM = {
         document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transection.incomes())
         document.getElementById('expanseDisplay').innerHTML = Utils.formatCurrency(Transection.expenses())
         document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transection.total())
+    },
+    clearTrasections() {
+        DOM.transectionContainer.innerHTML = ""
     }
 }
 
@@ -126,8 +127,23 @@ const Utils = {
         return seginal + value
     }
 }
+const App = {
+    init() {
+        Transection.all.forEach(transection => DOM.addTransection(transection))
 
+        DOM.updateBalance()
+    },
+    reload() {
+        DOM.clearTrasections()
+        App.init()
+    }
+}
+App.init()
 
-transections.forEach(transection => DOM.addTransection(transection))
+// Transection.remove(3)
+// Transection.add({
 
-DOM.updateBalance()
+//     description: 'Alo você',
+//     amount: 2000,
+//     date: '23/02/2021'
+// })
