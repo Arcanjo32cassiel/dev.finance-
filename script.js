@@ -10,67 +10,106 @@ openclosemodal();
 
 // =========/
 const transections = [{
-            id: 1,
-            description: ' Luz',
-            amount: -50000,
-            date: '23/01/2021',
-        },
-        {
-            id: 2,
-            description: ' Websiste',
-            amount: 500000,
-            date: '23/01/2021',
-        },
-        {
-            id: 3,
-            description: ' Internet',
-            amount: -20000,
-            date: '23/01/2021',
-        },
-        {
-            id: 4,
-            description: ' Matériais Escolares da Izáuria',
-            amount: -30000,
-            date: '23/02/2021',
-        }
-    ]
-    // ====TRNASECTIONS=====
+        id: 1,
+        description: ' Luz',
+        amount: -50000,
+        date: '23/01/2021',
+    },
+    {
+        id: 2,
+        description: ' Websiste',
+        amount: 500000,
+        date: '23/01/2021',
+    },
+    {
+        id: 3,
+        description: ' Internet',
+        amount: -20000,
+        date: '23/01/2021',
+    },
+    {
+        id: 4,
+        description: ' Matériais Escolares da Izáuria',
+        amount: -30000,
+        date: '23/02/2021',
+    },
+    {
+        id: 5,
+        description: ' Landingpage',
+        amount: 30000,
+        date: '3/02/2021',
+    },
+    {
+        id: 6,
+        description: ' Hostsite',
+        amount: 10000,
+        date: '10/02/2021',
+    }
+]
+
+
+// ====TRNASECTIONS=====
 const Transection = {
-        incomes() {
-            // Somar as entradas
-        },
-        expenses() {
-            // Somar as saídas
-        },
-        total() {
-            // Entradas - Saídas
-        }
+    all: transections,
+    incomes() {
+        let income = 0;
+        // transections.forEach(transection => {
+        //         if (transection.amount > 0) {
+        //             income += transection.amount
+        //         }
+        //     })
+        Transection.all.filter(transection => transection.amount > 0 ? income += transection.amount : income)
+        return income;
+    },
+    expenses() {
+        let expense = 0;
+        Transection.all.filter(transection => transection.amount < 0 ? expense += transection.amount : expense)
+        return expense;
+    },
+    total() {
+        // Entradas - Saídas
+        // let total = 0;
+        // transections.filter(transection => transection.amount > 0 ? total += transection.amount : total)
+        // transections.filter(transection => transection.amount < 0 ? total += transection.amount : total)
+        // return total / 100
+        return Transection.incomes() + Transection.expenses()
 
     }
-    // =====DOM=====
+
+}
+
+
+// =====DOM=====
 const DOM = {
-        transectionContainer: document.querySelector('#data-table tbody'),
-        addTransection(transection, index) {
+    transectionContainer: document.querySelector('#data-table tbody'),
+    addTransection(transection, index) {
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = DOM.innerHTMLTransection(transection);
+        const tr = document.createElement('tr');
+        tr.innerHTML = DOM.innerHTMLTransection(transection);
 
-            DOM.transectionContainer.appendChild(tr)
-        },
-        innerHTMLTransection(transection) {
-            const CSSclass = transection.amount > 0 ? "income" : "expense";
-            const amount = Utils.formatCurrency(transection.amount)
+        DOM.transectionContainer.appendChild(tr)
+    },
+    innerHTMLTransection(transection) {
+        const CSSclass = transection.amount > 0 ? "income" : "expense";
+        const amount = Utils.formatCurrency(transection.amount)
 
-            const html = ` 
+        const html = ` 
         <td class="description">${transection.description}</td>
         <td class="${CSSclass}"> ${amount} </td>
         <td class="date">${transection.date}</td>
         <td><img src="./images/minus.svg" alt="Remover Transação"></td>
     `
-            return html
-        }
+        return html
+    },
+    updateBalance() {
+        document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transection.incomes())
+        document.getElementById('expanseDisplay').innerHTML = Utils.formatCurrency(Transection.expenses())
+        document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transection.total())
     }
-    // ====UTILS======
+}
+
+
+// ====UTILS======
 const Utils = {
     formatCurrency(value) {
         const seginal = Number(value) < 0 ? "-" : ""
@@ -88,4 +127,7 @@ const Utils = {
     }
 }
 
+
 transections.forEach(transection => DOM.addTransection(transection))
+
+DOM.updateBalance()
