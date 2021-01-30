@@ -1,43 +1,26 @@
 // ====Modal=====
 const Modal = {
-    open() {
-        document.querySelector('.modal-overlay').classList.add('active')
+        open() {
+            document.querySelector('.modal-overlay').classList.add('active')
+        },
+        close() {
+            document.querySelector('.modal-overlay').classList.remove('active')
+        }
+    }
+    // ====Storage======
+const Storages = {
+    get() {
+        return JSON.parse(localStorage.getItem("dev.finances:transections")) || []
     },
-    close() {
-        document.querySelector('.modal-overlay').classList.remove('active')
+    set(transections) {
+        localStorage.setItem("dev.finances:transections", JSON
+            .stringify(transections))
     }
 }
 
 // ====TRNASECTIONS=====
 const Transection = {
-    all: [{
-            description: ' Luz',
-            amount: -50000,
-            date: '23/01/2021',
-        },
-        {
-            description: ' Websiste',
-            amount: 500000,
-            date: '23/01/2021',
-        }, {
-            description: ' Internet',
-            amount: -20000,
-            date: '23/01/2021',
-        }, {
-            description: ' Matériais Escolares da Izáuria',
-            amount: -30000,
-            date: '23/02/2021',
-        }, {
-            description: ' Landingpage',
-            amount: 30000,
-            date: '3/02/2021',
-        }, {
-            description: ' Hostsite',
-            amount: 10000,
-            date: '10/02/2021',
-        }
-
-    ],
+    all: Storages.get(),
     add(transection) {
         Transection.all.push(transection)
         App.reload()
@@ -82,11 +65,11 @@ const DOM = {
     addTransection(transection, index) {
 
         const tr = document.createElement('tr');
-        tr.innerHTML = DOM.innerHTMLTransection(transection);
-
+        tr.innerHTML = DOM.innerHTMLTransection(transection, index);
+        tr.dataset.index = index
         DOM.transectionContainer.appendChild(tr)
     },
-    innerHTMLTransection(transection) {
+    innerHTMLTransection(transection, index) {
         const CSSclass = transection.amount > 0 ? "income" : "expense";
         const amount = Utils.formatCurrency(transection.amount)
 
@@ -94,7 +77,7 @@ const DOM = {
         <td class="description">${transection.description}</td>
         <td class="${CSSclass}"> ${amount} </td>
         <td class="date">${transection.date}</td>
-        <td><img src="./images/minus.svg" alt="Remover Transação"></td>
+        <td ><img onclick="Transection.remove(${index})" src="./images/minus.svg" alt="Remover Transação"></td>
     `
         return html
     },
@@ -197,11 +180,13 @@ const Form = {
     }
 }
 
+
 const App = {
     init() {
-        Transection.all.forEach(transection => DOM.addTransection(transection))
+        Transection.all.forEach((transection, index) => DOM.addTransection(transection, index))
 
         DOM.updateBalance()
+        Storages.set(Transection.all)
     },
     reload() {
         DOM.clearTrasections()
