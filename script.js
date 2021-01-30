@@ -1,15 +1,12 @@
-const buttonNew = document.querySelector(".new");
-const modalOverlay = document.querySelector('.modal-overlay');
-const close = document.querySelector('.cancel');
-// ======//
-function openclosemodal() {
-    buttonNew.onclick = () => { modalOverlay.classList.add('active') }
-    close.onclick = () => { modalOverlay.classList.remove('active') }
+// ====Modal=====
+const Modal = {
+    open() {
+        document.querySelector('.modal-overlay').classList.add('active')
+    },
+    close() {
+        document.querySelector('.modal-overlay').classList.remove('active')
+    }
 }
-openclosemodal();
-
-// =========/
-
 
 // ====TRNASECTIONS=====
 const Transection = {
@@ -79,7 +76,6 @@ const Transection = {
 
 }
 
-
 // =====DOM=====
 const DOM = {
     transectionContainer: document.querySelector('#data-table tbody'),
@@ -112,33 +108,33 @@ const DOM = {
     }
 }
 
-
 // ====UTILS======
 const Utils = {
-        formatAmount(value) {
-            value = Number(value) * 100
-            return value
-        },
-        formatDate(date) {
-            const splittedDate = date.split("-")
-            return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
-        },
-        formatCurrency(value) {
-            const seginal = Number(value) < 0 ? "-" : ""
+    formatAmount(value) {
+        value = Number(value) * 100
+        return value
+    },
+    formatDate(date) {
+        const splittedDate = date.split("-")
+        return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+    },
+    formatCurrency(value) {
+        const seginal = Number(value) < 0 ? "-" : ""
 
-            value = String(value).replace(/\D/g, '')
+        value = String(value).replace(/\D/g, '')
 
-            value = Number(value) / 100
+        value = Number(value) / 100
 
-            value = value.toLocaleString('pt-VR', {
-                style: 'currency',
-                currency: 'BRL'
-            })
+        value = value.toLocaleString('pt-VR', {
+            style: 'currency',
+            currency: 'BRL'
+        })
 
-            return seginal + value
-        }
+        return seginal + value
     }
-    // ====Form======
+}
+
+// ====Form======
 const Form = {
     description: document.querySelector('input#description'),
     amount: document.querySelector('input#amount'),
@@ -193,15 +189,14 @@ const Form = {
             Form.clearfields()
 
             //modal feche
-            openclosemodal();
-
-
+            Modal.close()
         } catch (error) {
             alert(error.message)
         }
 
     }
 }
+
 const App = {
     init() {
         Transection.all.forEach(transection => DOM.addTransection(transection))
