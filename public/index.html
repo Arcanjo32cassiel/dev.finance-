@@ -40,35 +40,35 @@
         <div class="modal">
             <!-- <i class="fas fa-times"></i> -->
             <div id="form">
-                <form action="" onchange="">
+                <form action="" onsubmit="validateform.submit(event)">
                     <div class="input-group">
                         <label for="" class="sr-only">Nome</label>
-                        <input id="name" type="text" placeholder="Nome" autofocus>
+                        <input id="name" type="text" id="name" placeholder="Nome" required autofocus>
                     </div>
 
                     <div class="input-group">
                         <label for="" class="sr-only">E-mail</label>
-                        <input type="E-mail" placeholder="E-mail">
+                        <input type="E-mail" id="email" placeholder="E-mail" required>
                     </div>
                     <div class="input-group">
                         <label for="" class="sr-only">Senha</label>
-                        <input type="password" placeholder="Senha">
+                        <input type="password" id="password" placeholder="Senha" required>
                     </div>
                     <div class="input-group">
                         <label for="" class="sr-only">Confirme a senha</label>
-                        <input type="password" placeholder="Confirme a senha">
+                        <input type="password" id="confirmationpassword" placeholder="Confirme a senha" required>
                     </div>
                     <div class="input-group actions">
                         <a href="#" onclick="Modal.close()" class="button cancel">Cancelar</a>
                         <button id="save">Salvar</button>
                     </div>
-                    <!-- <button id="save">Salvar</button> -->
                 </form>
 
             </div>
         </div>
     </div>
     <script src="../src/modal.js"></script>
+    <script src="../src/validate.js"></script>
 </body>
 
 </html>

@@ -154,6 +154,7 @@ header {
     padding: 0.8rem;
     width: 100%;
     /* margin: .4rem 0; */
+    background-color: none;
 }
 
 .input-group {
