@@ -1,6 +1,7 @@
 html,
 body {
     height: 100vh;
+    overflow: hidden;
 }
 
 body {
@@ -9,12 +10,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-
-/* .container {
-    height: 100%;
-    width: 100%;
-} */
 
 header {
     width: 100%;
@@ -32,16 +27,14 @@ header {
     grid-auto-rows: auto;
     grid-template-areas: /**/
     "text img"/**/
-    " text img";
+    " wewill img";
     padding: 0 3rem;
     margin-top: 3rem;
+    transition: 3s
 }
 
-.cotent-child1 {
+.smallintro {
     grid-area: text;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 
 .smallintro p {
@@ -50,11 +43,13 @@ header {
     font-weight: 600;
 }
 
-.smallintro span {
+.smallintro span,
+.wewill span {
     color: #1DB63E;
 }
 
 .wewill {
+    grid-area: wewill;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,7 +160,45 @@ header {
     opacity: 0.4;
 }
 
+@media (max-width:839px) {
+    .content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas: /**/
+        "text img"/**/
+        " text img"/**/
+        "wewill wewill";
+        padding: 0 3rem;
+        margin-top: 3rem;
+    }
+}
 
-/* @media (min-widht:785px){
-
-} */
+@media (max-width:631px) {
+    body {
+        overflow-y: auto;
+    }
+    .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .smallintro {
+        order: 1;
+        align-self: center;
+    }
+    .smallintro p {
+        font-size: 100%;
+    }
+    .wewill {
+        order: 3;
+        margin-bottom: 3rem;
+    }
+    .wewill {
+        font-size: 1rem;
+    }
+    .img {
+        order: 2;
+    }
+}
