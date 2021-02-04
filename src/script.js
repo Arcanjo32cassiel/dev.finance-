@@ -1,13 +1,4 @@
-// ====Modal=====
-const Modal = {
-        open() {
-            document.querySelector('.modal-overlay').classList.add('active')
-        },
-        close() {
-            document.querySelector('.modal-overlay').classList.remove('active')
-        }
-    }
-    // ====Storage======
+// ====Storage======
 const Storages = {
     get() {
         return JSON.parse(localStorage.getItem("dev.finances:transections")) || []

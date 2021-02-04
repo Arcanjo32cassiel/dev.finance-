@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../src/main.css">
     <link rel="stylesheet" href="../src/home.css">
+    <link rel="stylesheet" href="../src/btncancelsave.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
     <link rel="shortcut icon" href="./images/icon_finance.svg" type="image/x-icon">
     <title>Dev.finance</title>
@@ -26,7 +28,7 @@
 
             <div class="wewill">
                 <p>Vamos conhecer a Dev.finance?</p>
-                <a href="#">Cadastrar</a>
+                <a href="#" id="register" onclick="Modal.open()">Cadastrar</a>
             </div>
         </div>
         <div class="img">
@@ -34,10 +36,11 @@
         </div>
     </section>
 
-    <div class="modal-overlay active">
+    <div class="modal-overlay ">
         <div class="modal">
+            <!-- <i class="fas fa-times"></i> -->
             <div id="form">
-                <form action="">
+                <form action="" onchange="">
                     <div class="input-group">
                         <label for="" class="sr-only">Nome</label>
                         <input id="name" type="text" placeholder="Nome" autofocus>
@@ -55,12 +58,17 @@
                         <label for="" class="sr-only">Confirme a senha</label>
                         <input type="password" placeholder="Confirme a senha">
                     </div>
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.close()" class="button cancel">Cancelar</a>
+                        <button id="save">Salvar</button>
+                    </div>
+                    <!-- <button id="save">Salvar</button> -->
                 </form>
 
             </div>
         </div>
     </div>
-
+    <script src="../src/modal.js"></script>
 </body>
 
 </html>

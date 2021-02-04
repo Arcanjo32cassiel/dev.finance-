@@ -95,8 +95,8 @@ header {
 }
 
 .modal-overlay {
-    /* opacity: 0;
-    visibility: hidden; */
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     bottom: 0.1rem;
     background-color: #00000060;
@@ -108,19 +108,61 @@ header {
 }
 
 .modal-overlay .modal {
-    background-color: #174d162f;
+    background-color: #c4c7ca48;
+    /* # 174d162f */
     height: 38rem;
     width: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.modal-overlay .modal>i {
+    position: absolute;
+    top: 1.5rem;
+    right: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 
-/* .active {
-    position: absolute;
-    top: 1rem;
-} */
+/* ===Form===== */
+
+#form {
+    max-width: 500px;
+}
+
+#form h2 {
+    margin-top: 0;
+}
+
+#form form input {
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.8rem;
+    width: 100%;
+    /* margin: .4rem 0; */
+}
+
+.input-group {
+    margin-top: 0.8rem;
+}
+
+.input-group small {
+    opacity: 0.4;
+}
 
 
 /* @media (min-widht:785px){
