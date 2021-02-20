@@ -103,7 +103,7 @@ header {
 }
 
 .modal-overlay .modal {
-    background-color: #c4c7ca48;
+    background-color: #95cac1ee;
     /* # 174d162f */
     height: 38rem;
     width: 85%;
@@ -118,7 +118,7 @@ header {
     top: 1.5rem;
     right: 10px;
     color: white;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.849);
     width: 2rem;
     height: 2rem;
     display: flex;
@@ -150,14 +150,57 @@ header {
     width: 100%;
     /* margin: .4rem 0; */
     background-color: none;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 4px solid white;
+    box-shadow: 0 0 0 0;
+    transition: .4s all;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+::placeholder {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+#form form input:focus {
+    border-bottom-color: #30c951;
 }
 
 .input-group {
-    margin-top: 0.8rem;
+    margin: 0.8rem 0 1.8rem;
+    position: relative;
 }
 
 .input-group small {
     opacity: 0.4;
+}
+
+.input-group #save {
+    width: 9rem;
+    background-color: #30c951;
+    height: 3.5rem;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: .4rem;
+}
+
+.error-validation {
+    position: absolute;
+    color: #c04141;
+    top: 3rem;
+    left: .4rem;
+    font-size: .8rem;
+}
+
+.template {
+    display: none;
 }
 
 @media (max-width:839px) {
